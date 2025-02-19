@@ -17,7 +17,7 @@ It taps into trends like:
 - Absurd, NSFW-related slang like "spicy thrills," "electric vibes," and "igniting the night"
 
 ### Logo
-![XCITE Logo](assets/xcitelogo.png)
+![XCITE Logo](logo.png)
 
 ### Tokenomics
 
