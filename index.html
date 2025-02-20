@@ -68,7 +68,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: url('hero-background.jpg') no-repeat center center/cover;
+            background: url('https://via.placeholder.com/1920x1080?text=XCITE+Background') no-repeat center center/cover;
             position: relative;
         }
         .hero::before {
@@ -108,6 +108,19 @@
         .hero button:hover {
             transform: scale(1.1);
             background-color: #ff00ff;
+        }
+        .hero .zap-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #0000ff;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .hero .zap-button:hover {
+            transform: scale(1.1);
         }
         section {
             padding: 50px 20px;
@@ -191,6 +204,11 @@
             width: 200px;
             box-shadow: 0 0 10px rgba(255, 64, 64, 0.2);
         }
+        .roadmap .countdown {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #ff00ff;
+        }
         .community-icons {
             display: flex;
             justify-content: center;
@@ -204,6 +222,20 @@
         }
         .community-icons a:hover {
             transform: scale(1.2);
+        }
+        .community .social-feed {
+            margin-top: 20px;
+            background: #222;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .utilities .meme-teaser {
+            margin-top: 20px;
+            background: #222;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 14px;
         }
         footer {
             background: #111;
@@ -223,14 +255,10 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
         @media (max-width: 768px) {
             .hero h1 { font-size: 24px; }
             .hero p { font-size: 16px; }
-            .hero button { padding: 10px 20px; font-size: 14px; }
+            .hero button, .hero .zap-button { padding: 10px 20px; font-size: 14px; }
             nav ul { flex-direction: column; align-items: center; }
             nav ul li { margin: 10px 0; }
             .logo h1 { font-size: 18px; }
@@ -238,6 +266,7 @@
             section p, section ul, section ol { font-size: 14px; }
             .community-icons a { font-size: 24px; margin: 0 10px; }
             .roadmap-timeline { flex-direction: column; align-items: center; }
+            .tokenomics-table { width: 100%; }
         }
     </style>
 </head>
@@ -265,6 +294,7 @@
             <h1>XCITE Coin</h1>
             <p>Ignite the Future, HODL the Thrill</p>
             <button onclick="window.open('https://jup.ag/swap/SOL-8E5pw1g1nQpmgVyeS1vZx8LokAZvuZgL6G1Uhr4iVbAB', '_blank')">Buy Now</button>
+            <button class="zap-button" onclick="playZapSound()">Zap It!</button>
         </div>
     </section>
 
@@ -293,6 +323,9 @@
             <li>XCITE THRILL: Voting platform for community governance.</li>
             <li>XCITE SHOCK: Cross-chain bridge to Ethereum and BSC.</li>
         </ul>
+        <div class="meme-teaser">
+            <p>Sample Meme: "XCITE Devil says: Zap or Flop? ⚡"</p>
+        </div>
     </section>
 
     <section id="roadmap" class="roadmap">
@@ -304,6 +337,9 @@
             <div class="roadmap-item">Phase 4: NFT Marketplace Launch</div>
             <div class="roadmap-item">Phase 5: CoinMarketCap Listing</div>
             <div class="roadmap-item">Phase 6: "Zap, Zap, Zap"—100,000 Holders!</div>
+        </div>
+        <div class="countdown">
+            Next Milestone (Phase 2): <span id="countdown">Loading...</span>
         </div>
     </section>
 
@@ -346,6 +382,9 @@
             <a href="https://telegram.org" target="_blank"><i class="fab fa-telegram"></i></a>
             <a href="https://discord.com" target="_blank"><i class="fab fa-discord"></i></a>
         </div>
+        <div class="social-feed">
+            <p>Twitter Feed Placeholder: "XCITE hits 5,000 holders! ⚡ #XCITE"</p>
+        </div>
     </section>
 
     <footer>
@@ -376,6 +415,31 @@
             let currentPrice = parseFloat(priceEl.textContent.slice(1)) + fluctuation;
             priceEl.textContent = `$${currentPrice.toFixed(3)}`;
         }, 5000);
+
+        // Zap sound effect
+        function playZapSound() {
+            const audio = new Audio('https://www.myinstants.com/media/sounds/lightning-strike-2.mp3');
+            audio.play().catch(error => console.log("Audio failed to play:", error));
+        }
+
+        // Countdown timer for roadmap (simulated, counting down to 7 days from now)
+        const countdownEl = document.getElementById('countdown');
+        const targetDate = new Date();
+        targetDate.setDate(targetDate.getDate() + 7); // 7 days from now
+        function updateCountdown() {
+            const now = new Date();
+            const distance = targetDate - now;
+            if (distance < 0) {
+                countdownEl.textContent = "Milestone Reached!";
+                return;
+            }
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            countdownEl.textContent = `${days}d ${hours}h ${minutes}m`;
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 60000); // Update every minute
     </script>
 </body>
 </html>
