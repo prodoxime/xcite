@@ -189,7 +189,7 @@
             margin-bottom: 30px;
             text-shadow: 2px 2px #ff00ff;
         }
-        section p, section ul {
+        section p {
             font-size: 16px;
             margin-bottom: 20px;
             text-align: center;
@@ -199,31 +199,29 @@
             text-align: center;
             max-width: 600px;
             margin: 0 auto;
+            padding: 0;
         }
         section ul li, section ol li {
             margin-bottom: 15px;
-            position: relative;
-            padding-left: 30px;
-            display: inline-block;
+            text-align: center;
+            display: block;
             width: 100%;
-            text-align: left;
         }
         section ul li:before {
             content: "⚡";
-            position: absolute;
-            left: 0;
             color: #ff4040;
+            margin-right: 10px;
         }
         section ol li:before {
             content: counter(step-counter) ".";
             counter-increment: step-counter;
-            position: absolute;
-            left: 0;
             color: #ff00ff;
+            margin-right: 10px;
         }
         .tokenomics-table {
             margin: 20px auto;
-            width: 80%;
+            width: 100%;
+            max-width: 800px;
             border-collapse: collapse;
             text-align: center;
         }
@@ -314,28 +312,30 @@
             }
             nav ul {
                 display: none;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                background: #111;
+                width: 100%;
+                flex-direction: column;
+                padding: 20px 0;
+                z-index: 99;
+            }
+            nav ul li {
+                margin: 10px 0;
+                text-align: center;
             }
             .hero h1 { font-size: 24px; }
             .hero p { font-size: 16px; }
             .hero button, .hero .zap-button { padding: 10px 20px; font-size: 14px; }
             .logo h1 { font-size: 18px; }
             section h2 { font-size: 24px; }
-            section p, section ul, section ol { font-size: 14px; }
+            section p { font-size: 14px; }
+            section ul, section ol { max-width: 100%; }
+            section ul li, section ol li { width: 100%; text-align: center; }
             .community-icons a { font-size: 24px; margin: 0 10px; }
             .roadmap-timeline { flex-direction: column; align-items: center; }
             .tokenomics-table { width: 100%; }
-            section ul li, section ol li {
-                width: 100%;
-                text-align: center;
-                padding-left: 0;
-            }
-            section ul li:before, section ol li:before {
-                display: none;
-            }
-            section ul, section ol {
-                margin: 0 auto;
-                padding: 0;
-            }
         }
     </style>
 </head>
@@ -520,6 +520,11 @@
             document.querySelector('nav ul').style.display = 'none';
             document.querySelector('.hamburger').style.display = 'block';
         }
+        document.querySelector('nav ul').addEventListener('click', (e) => {
+            if (window.innerWidth <= 768 && e.target.tagName === 'A') {
+                closeNav();
+            }
+        });
     </script>
 </body>
 </html>
