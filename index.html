@@ -37,6 +37,7 @@
         .logo {
             display: flex;
             align-items: center;
+            cursor: pointer; /* For Easter egg interaction */
         }
         .logo img {
             width: 50px;
@@ -69,6 +70,33 @@
             color: #fff;
             padding: 10px;
         }
+        .menu {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            background: #111;
+            width: 100%;
+            flex-direction: column;
+            padding: 20px 0;
+            z-index: 99;
+            text-align: center;
+        }
+        .menu.active {
+            display: flex;
+        }
+        .menu a {
+            display: block;
+            padding: 15px;
+            font-size: 18px;
+        }
+        .menu .closebtn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 36px;
+            cursor: pointer;
+        }
         .hero {
             height: 100vh;
             display: flex;
@@ -76,7 +104,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: url('https://via.placeholder.com/1920x1080?text=XCITE+Background') no-repeat center center/cover;
+            background: url('hero-background.jpg') no-repeat center center/cover;
             position: relative;
         }
         .hero::before {
@@ -163,6 +191,32 @@
         .hero .zap-button:active::before, .hero .zap-button:active::after {
             animation: lightning 0.5s infinite;
             background: #0000ff;
+        }
+        .easter-egg {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #111;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #ff4040;
+            z-index: 1001;
+            text-align: center;
+            animation: bounce 0.5s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+        .easter-egg img {
+            width: 100px;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
         section {
             padding: 50px 20px;
@@ -288,6 +342,33 @@
             font-size: 14px;
             text-align: center;
         }
+        .utilities .nft-carousel {
+            margin-top: 20px;
+            overflow: hidden;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .nft-carousel .nft-items {
+            display: flex;
+            animation: scroll 20s linear infinite;
+        }
+        .nft-carousel .nft-item {
+            flex: 0 0 auto;
+            width: 150px;
+            margin: 0 10px;
+            background: #222;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .nft-carousel .nft-item img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
         footer {
             background: #111;
             padding: 20px;
@@ -312,18 +393,9 @@
             }
             nav ul {
                 display: none;
-                position: fixed;
-                top: 60px;
-                left: 0;
-                background: #111;
-                width: 100%;
-                flex-direction: column;
-                padding: 20px 0;
-                z-index: 99;
             }
-            nav ul li {
-                margin: 10px 0;
-                text-align: center;
+            .menu.active {
+                display: flex;
             }
             .hero h1 { font-size: 24px; }
             .hero p { font-size: 16px; }
@@ -336,13 +408,16 @@
             .community-icons a { font-size: 24px; margin: 0 10px; }
             .roadmap-timeline { flex-direction: column; align-items: center; }
             .tokenomics-table { width: 100%; }
+            .nft-carousel { max-width: 100%; }
+            .nft-carousel .nft-items { animation: scroll 15s linear infinite; }
+            .nft-item { width: 120px; margin: 0 5px; }
         }
     </style>
 </head>
 <body>
     <header>
         <nav>
-            <div class="logo">
+            <div class="logo" onclick="checkEasterEgg()">
                 <img src="logo.png" alt="XCITE Logo">
                 <h1>XCITE</h1>
             </div>
@@ -358,6 +433,11 @@
             </ul>
         </nav>
     </header>
+
+    <div id="easter-egg" class="easter-egg">
+        <img src="devil.webp" alt="XCITE Devil">
+        <p>XCITE Zapped You! ⚡</p>
+    </div>
 
     <section id="home" class="hero">
         <div class="hero-content">
@@ -395,6 +475,15 @@
         </ul>
         <div class="meme-teaser">
             <p>Sample Meme: "XCITE Devil says: Zap or Flop? ⚡"</p>
+        </div>
+        <div class="nft-carousel">
+            <div class="nft-items">
+                <div class="nft-item"><img src="nft1.webp" alt="XCITE NFT 1"></div>
+                <div class="nft-item"><img src="https://via.placeholder.com/150?text=NFT2" alt="XCITE NFT 2"></div>
+                <div class="nft-item"><img src="https://via.placeholder.com/150?text=NFT3" alt="XCITE NFT 3"></div>
+                <div class="nft-item"><img src="https://via.placeholder.com/150?text=NFT4" alt="XCITE NFT 4"></div>
+                <div class="nft-item"><img src="https://via.placeholder.com/150?text=NFT5" alt="XCITE NFT 5"></div>
+            </div>
         </div>
     </section>
 
@@ -513,18 +602,37 @@
 
         // Sidebar menu (only for mobile, not used on desktop)
         function openNav() {
-            document.querySelector('nav ul').style.display = 'flex';
-            document.querySelector('.hamburger').style.display = 'none';
+            document.querySelector('.menu').classList.add('active');
         }
         function closeNav() {
-            document.querySelector('nav ul').style.display = 'none';
-            document.querySelector('.hamburger').style.display = 'block';
+            document.querySelector('.menu').classList.remove('active');
         }
-        document.querySelector('nav ul').addEventListener('click', (e) => {
-            if (window.innerWidth <= 768 && e.target.tagName === 'A') {
+        document.querySelector('.hamburger').addEventListener('click', openNav);
+        document.querySelector('.closebtn').addEventListener('click', closeNav);
+        document.querySelector('.menu').addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
                 closeNav();
             }
         });
+        document.addEventListener('click', (e) => {
+            if (!document.querySelector('nav').contains(e.target) && !document.querySelector('.menu').contains(e.target)) {
+                closeNav();
+            }
+        });
+
+        // Easter egg (triggered by clicking logo 5 times)
+        let clickCount = 0;
+        const easterEgg = document.getElementById('easter-egg');
+        function checkEasterEgg() {
+            clickCount++;
+            if (clickCount >= 5) {
+                easterEgg.style.display = 'block';
+                setTimeout(() => {
+                    easterEgg.style.display = 'none';
+                    clickCount = 0;
+                }, 3000); // Hide after 3 seconds
+            }
+        }
     </script>
 </body>
 </html>
