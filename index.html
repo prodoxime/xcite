@@ -126,10 +126,43 @@
             border: none;
             color: #fff;
             cursor: pointer;
+            position: relative;
             transition: transform 0.3s;
         }
         .hero .zap-button:hover {
             transform: scale(1.1);
+        }
+        .hero .zap-button::before, .hero .zap-button::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #ff4040;
+            transition: all 0.3s;
+            z-index: -1;
+        }
+        .hero .zap-button::before {
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-45deg);
+        }
+        .hero .zap-button::after {
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+        }
+        .hero .zap-button:hover::before, .hero .zap-button:hover::after {
+            width: 20px;
+            background: #ff00ff;
+        }
+        @keyframes lightning {
+            0% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0; transform: scale(0); }
+        }
+        .hero .zap-button:active::before, .hero .zap-button:active::after {
+            animation: lightning 0.5s infinite;
+            background: #0000ff;
         }
         section {
             padding: 50px 20px;
@@ -298,6 +331,10 @@
             }
             section ul li:before, section ol li:before {
                 display: none;
+            }
+            section ul, section ol {
+                margin: 0 auto;
+                padding: 0;
             }
         }
     </style>
