@@ -3,70 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XCITE Coin (XCITE) - Ignite the spice, HODL the thrill!</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>XCITE Coin - Ignite the Future, HODL the Thrill</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Press Start 2P', cursive;
         }
-
-        .fade-in {
-            opacity: 0;
-            animation: fadeIn 1s ease-in forwards;
+        body {
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
         }
-
-        .hero h1, .hero p, .hero button {
-            animation-delay: 0.2s;
+        header {
+            background-color: #111;
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
         }
-
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            width: 50px;
+            margin-right: 10px;
+            animation: pulse 2s infinite;
+        }
+        .logo h1 {
+            font-size: 24px;
+            color: #ff4040;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        nav ul li {
+            margin-left: 20px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        nav ul li a:hover {
+            color: #ff4040;
+        }
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: url('hero-background.jpg') no-repeat center center/cover;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+        .hero-content {
+            z-index: 2;
+            padding: 20px;
+        }
+        .hero h1 {
+            font-size: 48px;
+            color: #ff4040;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px #ff00ff;
+        }
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #ff00ff;
+        }
+        .hero button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ff4040;
+            border: none;
+            color: #000;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
         .hero button:hover {
             transform: scale(1.1);
             background-color: #ff00ff;
         }
-
-        /* Mobile Responsiveness */
+        section {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .about, .philosophy, .utilities, .roadmap, .tokenomics, .community {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        section h2 {
+            font-size: 32px;
+            color: #ff4040;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px #ff00ff;
+        }
+        section p, section ul {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        section ul, section ol {
+            list-style: none;
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        section ul li, section ol li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 30px;
+        }
+        section ul li:before {
+            content: "⚡";
+            position: absolute;
+            left: 0;
+            color: #ff4040;
+        }
+        section ol li:before {
+            content: counter(step-counter) ".";
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            color: #ff00ff;
+        }
+        .tokenomics-table {
+            margin: 20px auto;
+            width: 80%;
+            border-collapse: collapse;
+        }
+        .tokenomics-table th, .tokenomics-table td {
+            padding: 15px;
+            border: 1px solid #ff4040;
+        }
+        .tokenomics-table th {
+            background: #111;
+            color: #fff;
+        }
+        .tokenomics-table td {
+            background: #222;
+        }
+        .roadmap-timeline {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .roadmap-item {
+            background: #111;
+            padding: 20px;
+            border-radius: 5px;
+            width: 200px;
+            box-shadow: 0 0 10px rgba(255, 64, 64, 0.2);
+        }
+        .community-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .community-icons a {
+            color: #ff4040;
+            font-size: 30px;
+            transition: transform 0.3s;
+        }
+        .community-icons a:hover {
+            transform: scale(1.2);
+        }
+        footer {
+            background: #111;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #fff;
+        }
+        footer a {
+            color: #ff4040;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: #ff00ff;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 24px;
-            }
-
-            .hero p {
-                font-size: 16px;
-            }
-
-            .hero button {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav ul li {
-                margin: 10px 0;
-            }
-
-            .logo h1 {
-                font-size: 18px;
-            }
-
-            .about h2, .buy h2, .community h2 {
-                font-size: 24px;
-            }
-
-            .about p, .buy ol, .community p {
-                font-size: 14px;
-            }
-
-            .socials a {
-                padding: 8px 16px;
-                font-size: 12px;
-            }
+            .hero h1 { font-size: 24px; }
+            .hero p { font-size: 16px; }
+            .hero button { padding: 10px 20px; font-size: 14px; }
+            nav ul { flex-direction: column; align-items: center; }
+            nav ul li { margin: 10px 0; }
+            .logo h1 { font-size: 18px; }
+            section h2 { font-size: 24px; }
+            section p, section ul, section ol { font-size: 14px; }
+            .community-icons a { font-size: 24px; margin: 0 10px; }
+            .roadmap-timeline { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
@@ -80,78 +251,131 @@
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#buy">How to Buy</a></li>
+                <li><a href="#philosophy">Philosophy</a></li>
+                <li><a href="#utilities">Utilities</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+                <li><a href="#tokenomics">Tokenomics</a></li>
                 <li><a href="#community">Community</a></li>
             </ul>
         </nav>
     </header>
 
     <section id="home" class="hero">
-        <h1 class="fade-in">XCITE Coin</h1>
-        <p class="fade-in">Ignite the spice, HODL the thrill!</p>
-        <button class="fade-in" onclick="scrollToSection('buy')">Buy XCITE Now</button>
-    </section>
-
-    <section id="about" class="about">
-        <h2 class="fade-in">About XCITE</h2>
-        <p class="fade-in">XCITE Coin (XCITE) is the ultimate memecoin for thrill-seekers and spice enthusiasts. Inspired by the electrifying world of adult fantasies, XCITE celebrates the risqué side of internet culture with humor and absurdity. Join the thrill and HODL the spice!</p>
-        <div class="tokenomics fade-in">
-            <h3>Tokenomics</h3>
-            <ul>
-                <li>Total Supply: 1 Billion XCITE</li>
-                <li>Burn: 2% per transaction</li>
-                <li>Liquidity: 50% locked</li>
-                <li>Community Rewards: 10% for airdrops and meme contests</li>
-            </ul>
+        <div class="hero-content">
+            <h1>XCITE Coin</h1>
+            <p>Ignite the Future, HODL the Thrill</p>
+            <button onclick="window.open('https://jup.ag/swap/SOL-8E5pw1g1nQpmgVyeS1vZx8LokAZvuZgL6G1Uhr4iVbAB', '_blank')">Buy Now</button>
         </div>
     </section>
 
-    <section id="buy" class="buy">
-        <h2 class="fade-in">How to Buy XCITE</h2>
-        <ol class="fade-in">
-            <li>Set up Solana wallet (Phantom, Solflare).</li>
-            <li>Buy SOL on exchange (Binance, Coinbase).</li>
-            <li>Transfer SOL to wallet.</li>
-            <li>Swap SOL for meme coin on DEX (Raydium, Jupiter)</li>
-        </ol>
+    <section id="about" class="about">
+        <h2>Overview</h2>
+        <p>XCITE Coin ($XCITE) is the ultimate memecoin for thrill-seekers and spice enthusiasts, inspired by electrifying internet culture. With its devilish pixel-art charm, XCITE ignites the Solana blockchain with humor, absurdity, and community spirit. Contract Address: 8E5pw1g1nQpmgVyeS1vZx8LokAZvuZgL6G1Uhr4iVbAB. Not affiliated with any other "spicy" entities—just pure XCITE energy!</p>
+    </section>
+
+    <section id="philosophy" class="philosophy">
+        <h2>Creator Story</h2>
+        <p>XCITE was born from the fiery imagination of a 15-year-old coder from California, fueled by late-night meme sessions and a passion for blockchain. With parental support, XCITE launched on Solana, aiming to electrify the crypto world with its spicy vibe and global community adventures.</p>
+    </section>
+
+    <section id="philosophy" class="philosophy">
+        <h2>Philosophy</h2>
+        <p>XCITE embodies the wild spirit of memecoins, blending fun with utility. We’re building revenue-generating tools on Solana, with profits distributed to holders via buybacks, dividends, or burns. Our goal? A community-driven push to list on CoinMarketCap and CoinGecko, sparking global XCITE mania!</p>
+    </section>
+
+    <section id="utilities" class="utilities">
+        <h2>Utilities</h2>
+        <ul>
+            <li>XCITE SPARK BOT: Automate trades with a 0.02 SOL fee on Solana.</li>
+            <li>XCITE DASH: Real-time dashboard for price alerts and community updates at [xcite.ai](xcite.ai).</li>
+            <li>XCITE BLAST: Gamified staking for exclusive rewards.</li>
+            <li>XCITE ZAP: NFT marketplace for spicy digital collectibles.</li>
+            <li>XCITE THRILL: Voting platform for community governance.</li>
+            <li>XCITE SHOCK: Cross-chain bridge to Ethereum and BSC.</li>
+        </ul>
+    </section>
+
+    <section id="roadmap" class="roadmap">
+        <h2>Roadmap</h2>
+        <div class="roadmap-timeline">
+            <div class="roadmap-item">Phase 1: Launch on Solana via Pump.Fun</div>
+            <div class="roadmap-item">Phase 2: Community Growth to 10,000 Holders</div>
+            <div class="roadmap-item">Phase 3: XCITE Utilities Beta</div>
+            <div class="roadmap-item">Phase 4: NFT Marketplace Launch</div>
+            <div class="roadmap-item">Phase 5: CoinMarketCap Listing</div>
+            <div class="roadmap-item">Phase 6: "Zap, Zap, Zap"—100,000 Holders!</div>
+        </div>
+    </section>
+
+    <section id="tokenomics" class="tokenomics">
+        <h2>Tokenomics</h2>
+        <table class="tokenomics-table">
+            <tr>
+                <th>Metric</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Total Supply</td>
+                <td>1,000,000,000 $XCITE</td>
+            </tr>
+            <tr>
+                <td>Burned Supply</td>
+                <td>52,243,756 $XCITE</td>
+            </tr>
+            <tr>
+                <td>Circulating Supply</td>
+                <td>947,756,244 $XCITE</td>
+            </tr>
+            <tr>
+                <td>Distribution</td>
+                <td>100% to Liquidity Pool, LP Tokens burned</td>
+            </tr>
+            <tr>
+                <td>Ownership</td>
+                <td>Fully community-owned, decentralized</td>
+            </tr>
+        </table>
+        <p>Live Price: <span id="price">$0.025</span> (Simulated)</p>
     </section>
 
     <section id="community" class="community">
-        <h2 class="fade-in">Join the Community</h2>
-        <p class="fade-in">Follow us for spicy memes, TikTok challenges, and XCITE updates!</p>
-        <div class="socials fade-in">
-            <a href="https://x.com/xcitecoin" target="_blank">X (Twitter)</a>
-            <a href="https://t.me/xcitecoin" target="_blank">Telegram</a>
+        <h2>Join the Community</h2>
+        <p>Connect with us for spicy memes, electrifying updates, and XCITE thrills!</p>
+        <div class="community-icons">
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://telegram.org" target="_blank"><i class="fab fa-telegram"></i></a>
+            <a href="https://discord.com" target="_blank"><i class="fab fa-discord"></i></a>
         </div>
     </section>
 
     <footer>
-        <p>Disclaimer: XCITE is a memecoin for entertainment purposes. Invest responsibly.</p>
-        <p>Contact: contact@xcitecoin.com</p>
+        <p>© 2025 XCITE Coin. All Rights Reserved.</p>
+        <p>Follow us: 
+            <a href="https://twitter.com" target="_blank">Twitter</a> | 
+            <a href="https://telegram.org" target="_blank">Telegram</a> | 
+            <a href="https://discord.com" target="_blank">Discord</a>
+        </p>
     </footer>
 
     <script>
-        // Scroll to section function
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        // Intersection Observer for fade-in animations on scroll
+        // Fade in sections on scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                    observer.unobserve(entry.target);
+                    entry.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.3 });
 
-        document.querySelectorAll('.fade-in').forEach(element => {
-            observer.observe(element);
-        });
+        document.querySelectorAll('section').forEach(section => observer.observe(section));
+
+        // Simulated live price ticker
+        const priceEl = document.getElementById('price');
+        setInterval(() => {
+            const fluctuation = (Math.random() - 0.5) * 0.005;
+            let currentPrice = parseFloat(priceEl.textContent.slice(1)) + fluctuation;
+            priceEl.textContent = `$${currentPrice.toFixed(3)}`;
+        }, 5000);
     </script>
 </body>
 </html>
